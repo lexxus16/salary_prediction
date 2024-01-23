@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Prediction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 50px;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            align-self: center;
+        }
+
+        #legend {
+            text-align: left;
+            font-size: 14px;
+            color: #555;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 20px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Salary Prediction</h1>
+
+    <div id="container">
+        <form action="/predict" method="post">
+            <label for="sex">Sex:</label>
+            <input type="text" name="sex" required>
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" required>
+
+            <label for="designation">Designation:</label>
+            <input type="text" name="designation" required>
+
+            <label for="past_experience">Past Experience:</label>
+            <input type="number" name="past_experience" required>
+
+            <input type="submit" value="Predict Salary">
+        </form>
+
+        <div id="legend">
+            <h2>Legend:</h2>
+            <p><strong>SEX:</strong></p>
+            <p>Male: 0</p>
+            <p>Female: 1</p>
+
+            <p><strong>DESIGNATION:</strong></p>
+            <p>Analyst: 0</p>
+            <p>Associate: 1</p>
+            <p>Director: 2</p>
+            <p>Manager: 3</p>
+            <p>Senior Analyst: 4</p>
+            <p>Senior Manager: 5</p>
+        </div>
+    </div>
+
+    {% if prediction is not none %}
+        <div id="result">
+            Predicted Salary: {{ prediction }}
+        </div>
+    {% endif %}
+</body>
+</html>
